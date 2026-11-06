@@ -46,4 +46,8 @@ CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
 
+# vcpkg manifest 模式在本项目内生成的安装树，以及 preset 的构建目录
+/vcpkg_installed/
+/build/
+
 /.idea/
