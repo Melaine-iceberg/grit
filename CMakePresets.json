@@ -1,14 +1,61 @@
 {
-  "version": 2,
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 4,
+    "minor": 4,
+    "patch": 5
+  },
   "configurePresets": [
     {
-      "name": "vcpkg",
+      "name": "base",
+      "hidden": true,
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "dev",
+      "displayName": "Linux GCC (Ninja, no vcpkg)",
+      "description": "不依赖 vcpkg：GTest 缺失时由 tests/CMakeLists.txt 通过 FetchContent 获取。",
+      "inherits": "base"
+    },
+    {
+      "name": "vcpkg",
+      "displayName": "Linux GCC + vcpkg (Ninja)",
+      "description": "使用 vcpkg manifest 模式安装 gtest；需要设置 VCPKG_ROOT。",
+      "inherits": "base",
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-        "VCPKG_TARGET_TRIPLET": "x64-mingw-dynamic",
-        "VCPKG_HOST_TRIPLET": "x64-mingw-dynamic"
+        "VCPKG_TARGET_TRIPLET": "x64-linux"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "dev",
+      "configurePreset": "dev"
+    },
+    {
+      "name": "vcpkg",
+      "configurePreset": "vcpkg"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "dev",
+      "configurePreset": "dev",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "vcpkg",
+      "configurePreset": "vcpkg",
+      "output": {
+        "outputOnFailure": true
       }
     }
   ]

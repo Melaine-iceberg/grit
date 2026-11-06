@@ -66,7 +66,7 @@ target_compile_features(grit PUBLIC cxx_std_26)
 # 允许目标内部 import std；CMake 会自行构建 libstdc++ 的 std/std.compat BMI（需 Ninja 生成器）。
 set_target_properties(grit PROPERTIES CXX_MODULE_STD ON)
 
-# GCC / Clang (含 MinGW)：关闭 RTTI 与 C++ 异常。
+# GCC / Clang（Linux 与 MinGW）：关闭 RTTI 与 C++ 异常。
 # PUBLIC：消费者的代码生成选项必须与 grit 模块 BMI 保持一致。
 target_compile_options(grit PUBLIC
         $<$<COMPILE_LANG_AND_ID:CXX,GNU,Clang,AppleClang>:-fno-rtti -fno-exceptions>)

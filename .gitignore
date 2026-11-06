@@ -50,4 +50,8 @@ CMakeUserPresets.json
 /vcpkg_installed/
 /build/
 
+# CLion 在 Linux 下的默认构建目录与 clangd 缓存
+/cmake-build-*/
+/.cache/
+
 /.idea/

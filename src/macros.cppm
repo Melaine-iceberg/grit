@@ -116,9 +116,9 @@ namespace girt::macros::detail {
 void printDiagnosis(std::string_view expression, std::string_view message,
                     const std::source_location &location) {
   // 注意：这里刻意不使用 std::format 与 std::print。
-  // GCC 在 MinGW 上会把模块单元里实例化的格式化内建符号放进普通 .rdata（非
-  // COMDAT），
-  // 与其它编译单元中的同名实例冲突导致链接失败；诊断输出只需拼接字符串即可。
+  // 该项目最初在 Windows + MinGW GCC 上开发：GCC 会把模块单元里实例化的格式化
+  // 内建符号放进普通 .rdata（非 COMDAT），与其它编译单元中的同名实例冲突导致
+  // 链接失败。迁移到 Linux 后保留字符串拼接实现，避免重新引入该问题。
   std::string text;
 
   text += std::string_view{location.file_name()};
