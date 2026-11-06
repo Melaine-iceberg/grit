@@ -3,7 +3,7 @@ module;
 #include <grit/version.hpp>
 
 export module grit;
-
+export import :macros;
 import std;
 
 export namespace grit {

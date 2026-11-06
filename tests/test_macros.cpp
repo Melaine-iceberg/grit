@@ -1,7 +1,7 @@
 // grit 断言宏与诊断出口的单元测试。
 //
-// 致命断言 GRIT_ASSERT 的失败路径会 std::abort()，用 EXPECT_DEATH 在子进程里验证；
-// 软断言的失败路径全部在本进程内覆盖。
+// 致命断言 GRIT_ASSERT 的失败路径会 std::abort()，用 EXPECT_DEATH
+// 在子进程里验证； 软断言的失败路径全部在本进程内覆盖。
 //
 // 注意：GCC 只接受"先包含标准库头文件、后 import 模块"的顺序；反过来会得到
 // std / std.compat 实体重复声明的编译错误，所以 gtest 与标准库头文件必须排在

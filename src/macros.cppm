@@ -1,4 +1,4 @@
-export module macros;
+export module grit:macros;
 
 import std.compat;
 
